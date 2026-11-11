@@ -10,8 +10,9 @@ app.get('/notes', (req, res) => {
     res.json(notes);
 });
 
+
 app.post('/notes', (req, res) => {
-    const { text } = req.body;
+    const { text, title } = req.body;
 
     if (!text) {
         return res.status(400).json({
@@ -21,6 +22,7 @@ app.post('/notes', (req, res) => {
 
     const note = {
         id: notes.length + 1,
+        title: title || 'Untitled',
         text
     };
 
@@ -28,6 +30,7 @@ app.post('/notes', (req, res) => {
 
     res.status(201).json(note);
 });
+
 
 const PORT = process.env.PORT || 3000;
 
